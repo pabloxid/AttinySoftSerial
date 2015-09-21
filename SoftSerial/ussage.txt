@@ -1,0 +1,25 @@
+SoftSerial s1 (RX_PIN1);
+SoftSerial s2 (RX_PIN2);
+// etc.
+
+s1.begin (BAUDRATE);  // any baudrate, i.e. 3600, 1111, 5387, etc.
+// particularly suitable for low baudrates, since it not block CPU with delays.
+
+s2.begin (BAUDRATE);  // you must use same baudrate, since it uses the same timer
+
+
+// for actually begin receiving data, you must call:
+s1.listen(); 
+
+// if you want to switch to another SoftSerial, you must do this:
+s1.clear_rx_interrupt ();
+s2.listen();
+
+// the only available functions are:
+
+s1.available();
+s1.read();
+
+// this is a light weight library!
+// fully tested on ATtiny85 @ 8MHz
+// hope you enjoy it!
